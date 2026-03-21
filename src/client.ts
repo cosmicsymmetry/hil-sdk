@@ -87,12 +87,8 @@ export class HilWallet {
 
     const data = (await res.json()) as ProposePaymentResponse;
 
-    if (res.status === 403) {
-      throw new Error(`Transfer denied: ${data.reason}`);
-    }
-
     if (!res.ok) {
-      throw new Error(`Transfer failed: ${data.reason ?? res.statusText}`);
+      throw new Error(`Transfer ${res.status === 403 ? "denied" : "failed"}: ${data.reason ?? res.statusText}`);
     }
 
     // Auto-approved and executed
@@ -100,17 +96,7 @@ export class HilWallet {
       return data.txSignature;
     }
 
-    // Denied
-    if (data.status === "rejected") {
-      throw new Error(`Transfer denied: ${data.reason}`);
-    }
-
     // Awaiting approval — poll until resolved
-    if (data.status === "awaiting_approval") {
-      return this.waitForSignature(data.id);
-    }
-
-    // Fallback: poll
     return this.waitForSignature(data.id);
   }
 
