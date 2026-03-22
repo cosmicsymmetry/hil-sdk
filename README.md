@@ -146,5 +146,3 @@ Under the hood, the wallet routes every transfer through a guardrail server that
 2. Auto-approves small routine payments instantly
 3. Sends larger or unusual payments to a human approver via Telegram
 4. Signs and submits the transaction only after authorization
-
-The agent doesn't need to know any of this — it just calls `transfer()` and gets back a transaction signature.
