@@ -5,8 +5,18 @@ A Solana wallet with built-in payment guardrails. Use it like a regular wallet â
 ## Install
 
 ```bash
-bun add @hil/sdk
+bun add github:cosmicsymmetry/hil-sdk
 ```
+
+### OpenClaw Integration
+
+After installing, run the setup script to register the wallet skill with OpenClaw:
+
+```bash
+bunx hil-setup
+```
+
+This adds the wallet skill to OpenClaw and configures your wallet URL and API key. Restart OpenClaw to activate.
 
 ## Quick Start
 
